@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Portfolio - Creative and Passionate Full Stack Web Developer">
+    <meta name="keywords" content="portfolio, web developer, frontend, backend, full stack, react, node.js, javascript">
+    <meta name="author" content="Your Name">
+    <meta name="theme-color" content="#2563eb">
+    
+    <title>Portfolio | Full Stack Web Developer</title>
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="./css/style.css" as="style">
+    <link rel="preload" href="./css/animations.css" as="style">
+    <link rel="preload" href="./js/main.js" as="script">
+    <link rel="preload" href="./js/animations.js" as="script">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/ai-assistant.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://votre-portfolio.com">
+    <meta property="og:title" content="Portfolio | Full Stack Web Developer">
+    <meta property="og:description" content="Professional Portfolio - Creative and Passionate Full Stack Web Developer">
+    <meta property="og:image" content="https://votre-portfolio.com/assets/preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://votre-portfolio.com">
+    <meta property="twitter:title" content="Portfolio | Full Stack Web Developer">
+    <meta property="twitter:description" content="Professional Portfolio - Creative and Passionate Full Stack Web Developer">
+    <meta property="twitter:image" content="https://votre-portfolio.com/assets/preview.jpg">
+</head>
+<body>
+    <!-- Préchargeur -->
+    <div class="preloader glass-effect">
+        <div class="loader"></div>
+    </div>
+
+    <!-- En-tête -->
+    <header class="header glass-effect">
+        <nav class="nav">
+            <div class="logo">
+                <span class="gradient-text">Portfolio</span>
+                <span class="logo-dot"></span>
+            </div>
+            
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span data-translate="accueil">Home</span>
+                    </a></li>
+                    <li><a href="#about" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="apropos">About</span>
+                    </a></li>
+                    <li><a href="#portfolio" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span data-translate="portfolio">Portfolio</span>
+                    </a></li>
+                    <li><a href="#skills" class="nav-link">
+                        <i class="fas fa-code"></i>
+                        <span data-translate="competences">Skills</span>
+                    </a></li>
+                    <li><a href="#contact" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span data-translate="contact">Contact</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="welcome-message">
+                <span class="greeting gradient-text" data-translate="bonjour">Hi, I am</span>
+            </div>
+            <h1 class="hero-title" data-translate="dev-title">
+                Full Stack Web<br>Developer
+            </h1>
+            <div class="typing-text glass-effect">
+                <span class="typed-text" data-translate="expertise-title">🌟 Modern | </span>
+                <span class="cursor">|</span>
+            </div>
+            <div class="hero-actions">
+                <a href="#contact" class="cta-button" data-translate="me-contacter">
+                    Contact Me
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Éléments de design -->
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="scroll-text" data-translate="scroll-text">Scroll to discover</div>
+        </div>
+
+        <canvas id="particles-canvas"></canvas>
+    </section>
+
+    <!-- Sections principales -->
+    <main>
+        <!-- À Propos -->
+        <section id="about" class="section">
+            <h2 class="section-title" data-translate="about-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image slide-in">
+                    <div class="profile-container">
+                        <img src="assets/profile.jpg" alt="Seinileva - Full Stack Developer" class="profile-img">
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/" class="social-link fade-in" aria-label="LinkedIn" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/" class="social-link fade-in" aria-label="GitHub" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://twitter.com/" class="social-link fade-in" aria-label="Twitter" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3 class="about-subtitle gradient-text fade-in" data-translate="about-subtitle">Passionate Full Stack Developer</h3>
+                    <p class="about-description fade-in" data-translate="about-description1">I am Mohamed, a full-stack developer with two years of experience in creating responsive, functional websites and web applications integrating artificial intelligence. I have completed over 50 projects, including Shopify e-commerce sites, and I master new technologies like intelligent agents and AI.</p>
+                    
+                    <p class="about-description fade-in" data-translate="about-description2">Originally from Niger, I speak seven languages, including French, Turkish, and English, which helps me adapt easily to multicultural environments. Passionate about basketball and fitness, I have developed strong team spirit, enthusiasm, and a collaborative approach in my work.</p>
+
+                    <div class="interests-section fade-in">
+                        <h4 class="interests-title" data-translate="interests-title">Interests</h4>
+                        <div class="interests-grid">
+                            <div class="interest-item">
+                                <i class="fas fa-basketball-ball"></i>
+                                <span data-translate="basketball">Basketball</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-dumbbell"></i>
+                                <span data-translate="fitness">Fitness</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-language"></i>
+                                <span data-translate="languages">Languages</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-robot"></i>
+                                <span data-translate="ai">Artificial Intelligence</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-timeline">
+                        <div class="timeline-item slide-in">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Senior Developer</h4>
+                                <p class="timeline-date">2022 - Present</p>
+                                <p>Technical leadership and scalable web application development</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item slide-in">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Full Stack Developer</h4>
+                                <p class="timeline-date">2020 - 2022</p>
+                                <p>Full stack development with React and Node.js</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="stat-item fade-in">
+                            <span class="stat-number gradient-text">50+</span>
+                            <span class="stat-label" data-translate="completed-projects">Completed Projects</span>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <span class="stat-number gradient-text">5+</span>
+                            <span class="stat-label" data-translate="years-experience">Years of Experience</span>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <span class="stat-number gradient-text">30+</span>
+                            <span class="stat-label" data-translate="satisfied-clients">Satisfied Clients</span>
+                        </div>
+                    </div>
+
+                    <div class="about-cta fade-in">
+                        <a href="assets/CV.pdf" class="btn btn-primary button-hover" download data-translate="download-cv">Download CV</a>
+                        <a href="#contact" class="btn btn-outline button-hover" data-translate="me-contacter">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="section">
+            <h2 class="section-title" data-translate="portfolio-title">My Projects</h2>
+            <div class="portfolio-filters fade-in">
+                <button class="filter-btn modern-hover active" data-filter="all" data-translate="all">All</button>
+                <button class="filter-btn modern-hover" data-filter="web" data-translate="web">Web</button>
+                <button class="filter-btn modern-hover" data-filter="mobile" data-translate="mobile">Mobile</button>
+                <button class="filter-btn modern-hover" data-filter="design" data-translate="design">Design</button>
+            </div>
+            <div class="portfolio-carousel">
+                <div class="portfolio-container">
+                <article class="portfolio-item card-hover" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="assets/project1.jpg" alt="Project 1" class="parallax">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Medical AI Assistant</h3>
+                            <p>React.js, Node.js, MongoDB</p>
+                            <a href="https://mediscan3-wdvg.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="mobile">
+                    <div class="portfolio-image">
+                        <img src="assets/project2.jpg" alt="Project 2">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Chef Assistant Web App</h3>
+                            <p>React Native, Firebase</p>
+                            <a href="#" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="design">
+                    <div class="portfolio-image">
+                        <img src="assets/project3.jpg" alt="Project 3">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Sahko Delivery Finder</h3>
+                            <p>React.js, Node.js, Firebase</p>
+                            <a href="https://o5ppunhmcewvghktpljnzrkdrleydylb.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="assets/project4.jpg" alt="Project 4">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">E-commerce</h3>
+                            <p>Html5, Css3, Liquid, JavaScript</p>
+                            <a href="https://site-pour-vente-de-chips.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="assets/project5.jpg" alt="Project 5">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Expense Management App</h3>
+                            <p>PHP, Docker</p>
+                            <a href="https://gestionnaire-de-depense.onrender.com/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                </div>
+                <button class="carousel-btn prev" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="carousel-dots"></div>
+            </div>
+        </section>
+
+        <!-- Compétences -->
+        <section id="skills" class="section">
+            <h2 class="section-title" data-translate="skills-title">Mes Compétences</h2>
+            <div class="skills-container">
+                <div class="skills-category slide-in">
+                    <h3 class="category-title gradient-text">Frontend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item card-hover">
+                            <div class="skill-icon icon-rotate">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">HTML/CSS</h4>
+                                    <span class="skill-percentage">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="JavaScript">
+                            <div class="skill-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">JavaScript</h4>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="React">
+                            <div class="skill-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">React</h4>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category slide-in">
+                    <h3 class="category-title">Backend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="Node.js">
+                            <div class="skill-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">Node.js</h4>
+                                    <span class="skill-percentage">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="Python">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">Python</h4>
+                                    <span class="skill-percentage">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="PHP">
+                            <div class="skill-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="skill-info">
+                                <div class="skill-header">
+                                    <h4 class="skill-name">PHP</h4>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category slide-in">
+                    <h3 class="category-title">Outils & DevOps</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="Git">
+                            <div class="skill-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>Git</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="Docker">
+                            <div class="skill-icon">
+                                <i class="fab fa-docker"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>Docker</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="AWS">
+                            <div class="skill-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>AWS</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category slide-in">
+                    <h3 class="category-title gradient-text">Intelligence Artificielle</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item card-hover">
+                            <div class="skill-icon icon-rotate">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>Machine Learning</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>Deep Learning</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="skill-info">
+                                <h4>NLP</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <h2 class="section-title" data-translate="contact-title">Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item slide-in">
+                        <i class="fas fa-envelope icon-float"></i>
+                        <h3 data-translate="email">Email</h3>
+                        <p>personelmomo1@gmail.com</p>
+                    </div>
+                    <div class="contact-item slide-in">
+                        <i class="fas fa-phone"></i>
+                        <h3 data-translate="phone">Phone</h3>
+                        <p>+90 555 078 11 18</p>
+                    </div>
+                    <div class="contact-item slide-in">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3 data-translate="location">Location</h3>
+                        <p>Istanbul, Turkey</p>
+                    </div>
+                </div>
+                
+                <form class="contact-form fade-in" id="contact-form">
+                    <div class="form-group modern-focus">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name" data-translate="name">Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email" data-translate="email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" required>
+                        <label for="subject" data-translate="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" required></textarea>
+                        <label for="message" data-translate="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary button-hover" data-translate="send">Send</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section Témoignages -->
+        <section id="testimonials" class="section">
+            <h2 class="section-title" data-translate="testimonials-title">What My Clients Say</h2>
+            <div class="testimonials-carousel">
+                <div class="testimonials-container">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "Mohamed transformed our vision into reality with an exceptional web application. His technical expertise and creativity exceeded our expectations."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Sophie Martin</h4>
+                                <p>CEO, TechStart</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "A talented developer who perfectly understands business needs. Our e-commerce site is now more performant than ever."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Thomas Dubois</h4>
+                                <p>Founder, EasyShop</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "Mohamed's ability to solve complex problems while maintaining excellent communication is remarkable."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Marie Laurent</h4>
+                                <p>CTO, InnovTech</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "His expertise in React and Node.js helped us modernize our platform. The results are exceptional."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Alexandre Petit</h4>
+                                <p>Technical Director, WebSolutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "Mohamed developed an intuitive and modern user interface. His expertise in animations is impressive."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Julie Moreau</h4>
+                                <p>UX Designer, DigitalCraft</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "A true professional who perfectly masters the latest web technologies. Our application has never been more performant."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Paul Durand</h4>
+                                <p>CTO, AppMakers</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "The transformation of our e-commerce site is impressive. The smooth animations have significantly improved the user experience."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Emma Bernard</h4>
+                                <p>E-commerce Manager, StyleShop</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "An exceptional full-stack developer! His ability to manage projects from A to Z is impressive."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Lucas Girard</h4>
+                                <p>Product Owner, TechInno</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "Mohamed's SEO expertise has significantly improved our online visibility. An investment that was worth it!"
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Sarah Cohen</h4>
+                                <p>Marketing Director, DigitalGrowth</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ★★★★★
+                        </div>
+                        <p class="testimonial-text">
+                            "An exceptional collaboration! Mohamed was able to adapt his technical solutions to our specific needs."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Marc Leroy</h4>
+                                <p>CEO, StartupLab</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Ajouter un Témoignage -->
+        <section id="ajouter-temoignage" class="section">
+            <h2 class="section-title gradient-text fade-in" data-translate="leave-review">Leave Your Review</h2>
+            <div class="testimonial-form-container">
+                <form class="testimonial-form fade-in" id="testimonial-form">
+                    <div class="form-group">
+                        <input type="text" id="testimonial-name" name="name" required>
+                        <label for="testimonial-name" data-translate="your-name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="testimonial-position" name="position" required>
+                        <label for="testimonial-position" data-translate="your-position">Your Position</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="testimonial-message" name="message" required></textarea>
+                        <label for="testimonial-message" data-translate="your-testimonial">Your Testimonial</label>
+                    </div>
+                    <div class="rating-group">
+                        <label data-translate="rating">Rating:</label>
+                        <div class="star-rating">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary button-hover" data-translate="send-testimonial">Send Testimonial</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Chat Widget -->
+        <div class="ai-chat-widget">
+            <div class="chat-header">
+                <div class="ai-avatar">
+                    <div class="robot-icon"></div>
+                </div>
+                <h3 data-translate="ai-assistant">Assistant IA</h3>
+                <div class="header-buttons">
+                    <button class="minimize-btn" aria-label="Minimize" data-translate-aria="minimize">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="clear-btn" aria-label="Clear" data-translate-aria="clear">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chat-messages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            <div class="chat-input">
+                <textarea data-translate-placeholder="write-message" placeholder="Écrivez votre message..."></textarea>
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Button to open/close chat -->
+        <div class="ai-chat-toggle">
+            <div class="robot-icon"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer glass-effect">
+        <p data-translate="footer-text">&copy; 2024 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollSmoother.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/translations.js"></script>
+    <script type="module" src="./js/chat.js"></script>
+    <script src="./js/particles.js"></script>
+    <script src="./js/parallax.js"></script>
+    <script src="./js/scroll-animations.js"></script>
+    <script src="./js/portfolio-carousel.js"></script>
+    <script src="./js/testimonials-carousel.js"></script>
+    <script src="./js/contact.js"></script>
+</body>
+</html> 
