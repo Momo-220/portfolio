@@ -1,6 +1,6 @@
 // Configuration
 const config = {
-    API_URL: 'https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro:generateContent',
+    API_URL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
     GEMINI_API_KEY: 'AIzaSyBGWbgv--fopgyiJvv6_qPB3RM83PR7WVg'
 };
 

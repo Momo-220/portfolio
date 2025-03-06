@@ -1306,41 +1306,94 @@ body.dark-theme .mobile-menu-btn span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    background: var(--primary-color);
-    border: none;
-    color: white;
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
-    opacity: 0.9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.carousel-btn:hover {
-    background: var(--secondary-color);
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-btn.prev {
-    left: -20px;
+    left: -60px;
 }
 
 .carousel-btn.next {
-    right: -20px;
+    right: -60px;
 }
 
+.carousel-btn i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:hover i {
+    color: #fff;
+    transform: scale(1.2);
+}
+
+/* Styles pour le mode sombre */
+body.dark-theme .carousel-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .carousel-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Styles responsifs */
+@media (max-width: 1200px) {
+    .carousel-btn.prev {
+        left: -40px;
+    }
+    
+    .carousel-btn.next {
+        right: -40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .carousel-btn i {
+        color: #fff;
+    }
+
+    .carousel-btn.prev {
+        left: 10px;
+    }
+    
+    .carousel-btn.next {
+        right: 10px;
+    }
+}
+
+/* Points de navigation du carrousel */
 .carousel-dots {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 10px;
     margin-top: 2rem;
 }
 
@@ -1348,56 +1401,15 @@ body.dark-theme .mobile-menu-btn span {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--text-secondary);
-    opacity: 0.5;
+    background: rgba(var(--primary-color-rgb), 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .dot.active {
+    width: 25px;
+    border-radius: 10px;
     background: var(--primary-color);
-    opacity: 1;
-    transform: scale(1.2);
-}
-
-@media (max-width: 1200px) {
-    .testimonial-card {
-        flex: 0 0 calc(50% - 2rem);
-        min-width: calc(50% - 2rem);
-    }
-}
-
-@media (max-width: 768px) {
-    .testimonial-card {
-        flex: 0 0 calc(100% - 2rem);
-        min-width: calc(100% - 2rem);
-    }
-    
-    .carousel-btn {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .carousel-btn.prev {
-        left: 5px;
-    }
-    
-    .carousel-btn.next {
-        right: 5px;
-    }
-}
-
-/* Support du mode sombre */
-body.dark-theme .testimonial-card {
-    background: rgba(30, 30, 30, 0.8);
-}
-
-body.dark-theme .carousel-btn {
-    background: var(--primary-color);
-}
-
-body.dark-theme .carousel-btn:hover {
-    background: var(--secondary-color);
 }
 
 /* Animations du carrousel */
@@ -2327,5 +2339,307 @@ body.dark-theme .lang-btn.active {
     .lang-btn {
         padding: 0.2rem 0.4rem;
         font-size: 0.8rem;
+    }
+}
+
+/* Styles de base pour tous les boutons */
+.btn,
+.cta-button,
+.filter-btn,
+.carousel-btn,
+.lang-btn,
+.theme-toggle,
+.send-btn,
+.retry-btn {
+    position: relative;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Effet hover général */
+.btn:hover,
+.cta-button:hover,
+.filter-btn:hover,
+.carousel-btn:hover,
+.lang-btn:hover,
+.theme-toggle:hover,
+.send-btn:hover,
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Effet active */
+.btn:active,
+.cta-button:active,
+.filter-btn:active,
+.carousel-btn:active,
+.lang-btn:active,
+.theme-toggle:active,
+.send-btn:active,
+.retry-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Effet ripple au clic */
+.btn::after,
+.cta-button::after,
+.filter-btn::after,
+.carousel-btn::after,
+.lang-btn::after,
+.theme-toggle::after,
+.send-btn::after,
+.retry-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:active::after,
+.cta-button:active::after,
+.filter-btn:active::after,
+.carousel-btn:active::after,
+.lang-btn:active::after,
+.theme-toggle:active::after,
+.send-btn:active::after,
+.retry-btn:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+/* Styles spécifiques pour les boutons CTA */
+.cta-button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+    border: 2px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #2563eb 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cta-button:hover::before {
+    opacity: 1;
+}
+
+/* Styles pour les boutons de filtre */
+.filter-btn {
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+    margin: 0 8px;
+    font-size: 0.9rem;
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Styles pour les boutons de carrousel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-btn.prev {
+    left: -60px;
+}
+
+.carousel-btn.next {
+    right: -60px;
+}
+
+.carousel-btn i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:hover i {
+    color: #fff;
+    transform: scale(1.2);
+}
+
+/* Styles pour les boutons de langue */
+.lang-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.lang-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Styles pour le bouton de thème */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    transform: rotate(180deg);
+}
+
+/* Styles pour le bouton d'envoi */
+.send-btn {
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.send-btn i {
+    transition: transform 0.3s ease;
+}
+
+.send-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Styles pour le bouton de réessai */
+.retry-btn {
+    padding: 10px 20px;
+    background: var(--error-color, #dc2626);
+    color: #fff;
+}
+
+/* Styles pour le mode sombre */
+body.dark-theme .btn,
+body.dark-theme .cta-button,
+body.dark-theme .filter-btn,
+body.dark-theme .carousel-btn,
+body.dark-theme .lang-btn,
+body.dark-theme .theme-toggle,
+body.dark-theme .send-btn,
+body.dark-theme .retry-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+    .btn,
+    .cta-button,
+    .filter-btn,
+    .carousel-btn,
+    .lang-btn,
+    .theme-toggle,
+    .send-btn,
+    .retry-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .theme-toggle {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Animation de chargement pour les boutons */
+.btn.loading,
+.cta-button.loading,
+.send-btn.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn.loading::before,
+.cta-button.loading::before,
+.send-btn.loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.8s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
     }
 } 
