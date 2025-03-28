@@ -28,12 +28,16 @@ class WelcomeTextAnimation {
         this.charIndex = 0;
         this.isTyping = true;
         this.currentText = '';
+        this.textElement = null;
+        this.cursorElement = null;
 
         this.setupElements();
         this.start();
     }
 
     setupElements() {
+        if (!this.element) return;
+        
         this.element.innerHTML = '';
         this.textElement = document.createElement('span');
         this.textElement.classList.add('typed-text');
@@ -46,6 +50,8 @@ class WelcomeTextAnimation {
     }
 
     typeText() {
+        if (!this.textElement || !this.texts[this.currentLang]) return;
+        
         const currentText = this.texts[this.currentLang][this.currentIndex];
         
         if (this.charIndex < currentText.length) {
@@ -60,7 +66,9 @@ class WelcomeTextAnimation {
                 this.charIndex++;
             }
             
-            this.textElement.textContent = this.currentText;
+            if (this.textElement) {
+                this.textElement.textContent = this.currentText;
+            }
             setTimeout(() => this.typeText(), 100);
         } else {
             setTimeout(() => this.eraseText(), 2000);
@@ -68,6 +76,8 @@ class WelcomeTextAnimation {
     }
 
     eraseText() {
+        if (!this.textElement) return;
+        
         if (this.currentText.length > 0) {
             const lastChar = this.currentText.slice(-2);
             if (lastChar.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/)) {
@@ -76,7 +86,9 @@ class WelcomeTextAnimation {
                 this.currentText = this.currentText.slice(0, -1);
             }
             
-            this.textElement.textContent = this.currentText;
+            if (this.textElement) {
+                this.textElement.textContent = this.currentText;
+            }
             setTimeout(() => this.eraseText(), 50);
         } else {
             this.currentIndex = (this.currentIndex + 1) % this.texts[this.currentLang].length;
@@ -182,4 +194,142 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialisation des autres animations
     new ScrollAnimationManager();
     new PageAnimationManager();
+
+    // Initialiser GSAP
+    if (typeof gsap !== 'undefined') {
+        // Enregistrer les plugins si disponibles
+        if (gsap.ScrollTrigger) {
+            gsap.registerPlugin(gsap.ScrollTrigger);
+        }
+        if (gsap.ScrollToPlugin) {
+            gsap.registerPlugin(gsap.ScrollToPlugin);
+        }
+        
+        // Animation de l'en-tête
+        gsap.from('.header', {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+        
+        // Animation du titre et du sous-titre
+        gsap.from('.hero-title', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.typing-text', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+        
+        // Animation des boutons
+        gsap.from('.hero-actions', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.9,
+            ease: 'power3.out'
+        });
+        
+        // Animation des formes
+        gsap.from('.shape', {
+            scale: 0,
+            opacity: 0,
+            duration: 1,
+            delay: 1.2,
+            stagger: 0.2,
+            ease: 'elastic.out(1, 0.3)'
+        });
+        
+        // Animation du scroll indicator
+        gsap.from('.scroll-indicator', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1.5,
+            ease: 'power3.out'
+        });
+        
+        // Animations au scroll
+        if (gsap.ScrollTrigger) {
+            // Section à propos
+            gsap.to('.about-image', {
+                scrollTrigger: {
+                    trigger: '.about-image',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+            
+            // Animation des stats
+            gsap.to('.stat-item', {
+                scrollTrigger: {
+                    trigger: '.about-stats',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                duration: 0.8,
+                ease: 'back.out(1.7)'
+            });
+            
+            // Animation des compétences
+            gsap.to('.skills-category', {
+                scrollTrigger: {
+                    trigger: '.skills-container',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                stagger: 0.3,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+            
+            // Animation des barres de progression
+            gsap.to('.skill-progress', {
+                scrollTrigger: {
+                    trigger: '.skills-container',
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                },
+                width: function(i, el) {
+                    return el.getAttribute('style').split(':')[1].trim();
+                },
+                duration: 1.5,
+                ease: 'power3.out',
+                stagger: 0.1
+            });
+            
+            // Animation du formulaire de contact
+            gsap.to('.contact-form', {
+                scrollTrigger: {
+                    trigger: '.contact-form',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        }
+    } else {
+        console.warn('GSAP n\'est pas disponible. Les animations sont désactivées.');
+    }
 }); 

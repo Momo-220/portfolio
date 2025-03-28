@@ -62,7 +62,7 @@ class AIAssistant {
         const messages = welcomeMessages[currentLang] || welcomeMessages.fr;
 
         messages.forEach((message, index) => {
-            setTimeout(() => {
+        setTimeout(() => {
                 this.addMessage('assistant', message);
             }, index * 1000);
         });
