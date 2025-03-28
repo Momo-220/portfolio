@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.googleapis.com https://*.gstatic.com https://*.cloudflare.com https://cdnjs.cloudflare.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; frame-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.app https://*.vercel.com https://*.googleapis.com https://*.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://*.vercel.com https://*.vercel-analytics.com https://*.vercel-insights.com https://*.analytics.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.com; frame-src 'self';">
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHVELGK528"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SHVELGK528');
-    </script>
+    <!-- Vercel Analytics sera injecté automatiquement via le script -->
     
     <meta name="description" content="Professional Portfolio - Creative and Passionate Full Stack Web Developer">
     <meta name="keywords" content="portfolio, web developer, frontend, backend, full stack, react, node.js, javascript">
@@ -776,9 +769,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollToPlugin.min.js" defer></script>
     <script src="./js/main.js" defer></script>
     <script src="./js/animations.js" defer></script>
     <script src="./js/translations.js" defer></script>
@@ -789,5 +782,6 @@
     <script src="./js/portfolio-carousel.js" defer></script>
     <script src="./js/testimonials-carousel.js" defer></script>
     <script src="./js/contact.js" defer></script>
+    <script src="./js/vercel-analytics.js" defer></script>
 </body>
 </html> 
