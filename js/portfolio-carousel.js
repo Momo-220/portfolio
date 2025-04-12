@@ -3,22 +3,17 @@ class PortfolioCarousel {
         this.carousel = document.querySelector('.portfolio-carousel');
         this.container = this.carousel.querySelector('.portfolio-container');
         this.items = this.carousel.querySelectorAll('.portfolio-item');
-        this.prevBtn = this.carousel.querySelector('.carousel-btn.prev');
-        this.nextBtn = this.carousel.querySelector('.carousel-btn.next');
         this.dots = this.carousel.querySelector('.carousel-dots');
         
         this.currentIndex = 0;
         this.itemsPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
         this.isAnimating = false;
+        this.autoplayInterval = null;
         
         this.init();
     }
 
     init() {
-        // Initialisation des boutons de navigation
-        this.prevBtn.addEventListener('click', () => this.navigate('prev'));
-        this.nextBtn.addEventListener('click', () => this.navigate('next'));
-        
         // Initialisation des points de navigation
         this.createDots();
         
@@ -30,6 +25,30 @@ class PortfolioCarousel {
         
         // Mise à jour initiale
         this.updateCarousel();
+        
+        // Démarrer le défilement automatique
+        this.startAutoplay();
+    }
+
+    startAutoplay() {
+        // Arrêter tout intervalle existant
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+        }
+        
+        // Créer un nouvel intervalle pour le défilement automatique
+        this.autoplayInterval = setInterval(() => {
+            if (!document.hidden && !this.isAnimating) {
+                this.navigate('next');
+            }
+        }, 5000); // Défilement toutes les 5 secondes
+    }
+
+    stopAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+            this.autoplayInterval = null;
+        }
     }
 
     navigate(direction) {
@@ -89,10 +108,18 @@ class PortfolioCarousel {
             dot.classList.add('dot');
             dot.addEventListener('click', () => {
                 if (!this.isAnimating) {
+                    // Arrêter temporairement le défilement automatique
+                    this.stopAutoplay();
+                    
                     const targetIndex = i * this.itemsPerView;
                     const direction = targetIndex > this.currentIndex ? 'next' : 'prev';
                     this.currentIndex = targetIndex;
                     this.updateCarousel(direction);
+                    
+                    // Redémarrer le défilement automatique après un clic
+                    setTimeout(() => {
+                        this.startAutoplay();
+                    }, 5000);
                 }
             });
             this.dots.appendChild(dot);
@@ -114,6 +141,8 @@ class PortfolioCarousel {
         
         this.carousel.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
+            // Arrêter temporairement le défilement automatique lors du toucher
+            this.stopAutoplay();
         }, { passive: true });
         
         this.carousel.addEventListener('touchend', (e) => {
@@ -127,6 +156,11 @@ class PortfolioCarousel {
                     this.navigate('prev');
                 }
             }
+            
+            // Redémarrer le défilement automatique après le toucher
+            setTimeout(() => {
+                this.startAutoplay();
+            }, 1000);
         });
     }
 
@@ -144,5 +178,14 @@ class PortfolioCarousel {
 
 // Initialisation du carrousel
 document.addEventListener('DOMContentLoaded', () => {
-    new PortfolioCarousel();
+    const portfolioCarousel = new PortfolioCarousel();
+    
+    // Gérer la visibilité de page
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            portfolioCarousel.stopAutoplay();
+        } else {
+            portfolioCarousel.startAutoplay();
+        }
+    });
 }); 

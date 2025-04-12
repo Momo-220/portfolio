@@ -1388,28 +1388,58 @@ body.dark-theme .carousel-btn:hover {
     }
 }
 
-/* Points de navigation du carrousel */
+/* Styles améliorés pour les points de navigation du carrousel */
 .carousel-dots {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
     gap: 10px;
-    margin-top: 2rem;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
+.carousel-dots .dot {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: rgba(var(--primary-color-rgb), 0.3);
+    background: rgba(37, 99, 235, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.dot.active {
-    width: 25px;
-    border-radius: 10px;
+.carousel-dots .dot::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.carousel-dots .dot.active {
     background: var(--primary-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+.carousel-dots .dot:hover {
+    background: rgba(37, 99, 235, 0.7);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .carousel-dots {
+        gap: 8px;
+    }
+    
+    .carousel-dots .dot {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 /* Animations du carrousel */
@@ -2292,17 +2322,17 @@ body.dark-theme .carousel-btn:hover {
 .lang-selector {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     margin-right: 15px;
 }
 
 .lang-btn {
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 6px 10px;
+    font-size: 0.85rem;
     background: transparent;
     border: 2px solid var(--primary-color);
     color: var(--text-color);
-    border-radius: 12px;
+    border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -2326,12 +2356,13 @@ body.dark-theme .lang-btn.active {
 
 @media (max-width: 768px) {
     .lang-selector {
-        margin-right: 0.5rem;
+        margin-right: 8px;
     }
     
     .lang-btn {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.8rem;
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        border-width: 1px;
     }
 }
 

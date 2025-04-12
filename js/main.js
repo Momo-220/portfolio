@@ -416,212 +416,264 @@ class LanguageManager {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    // Attendre que le DOM soit complètement chargé avant d'initialiser
-    setTimeout(() => {
-        try {
-            initApp();
-        } catch (error) {
-            console.error('Erreur lors de l\'initialisation de l\'application:', error);
-        }
-    }, 300); // Augmentation du délai pour s'assurer que tout est bien chargé
-});
+    // Masquer le préchargeur
+    const preloader = document.querySelector('.preloader');
+    window.addEventListener('load', () => {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    });
+    
+    // Initialiser les gestionnaires
+    new ThemeManager();
+    new NavigationManager();
+    new AnimationManager();
+    new ParticlesManager();
+    new LanguageManager();
 
-function initApp() {
-    // Variables DOM
-    const header = document.querySelector('.header');
+    // Éléments du DOM
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navContainer = document.querySelector('.nav-container');
-    const themeToggle = document.querySelector('.theme-toggle');
-    const preloader = document.querySelector('.preloader');
-    
-    // Retirer le préchargeur après le chargement complet
-    if (preloader) {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 500);
-    }
-    
-    // Navigation fixe au scroll avec animation de masquage/affichage
-    let lastScrollY = 0;
-    
-    function handleScroll() {
-        if (header) {
-            const currentScrollY = window.scrollY;
-            
-            // Ajouter/enlever la classe scrolled
-            if (currentScrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            // Masquer/afficher la barre lors du défilement
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Défilement vers le bas - masquer la barre
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                // Défilement vers le haut - afficher la barre
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollY = currentScrollY;
-        }
-    }
-    
-    // Utiliser un debounce pour optimiser les performances
-    window.addEventListener('scroll', () => {
-        requestAnimationFrame(handleScroll);
-    });
-    
-    // Exécuter une fois au début pour initialiser l'état
-    handleScroll();
-    
-    // Menu mobile
-    if (mobileMenuBtn && navContainer) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navContainer.classList.toggle('active');
-        });
-    }
-    
-    // Fermer le menu mobile lorsqu'un lien est cliqué
     const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        if (link) {
-            link.addEventListener('click', () => {
-                if (mobileMenuBtn && navContainer) {
-                    mobileMenuBtn.classList.remove('active');
-                    navContainer.classList.remove('active');
-                }
-            });
-        }
-    });
-    
-    // Liens de navigation actifs au scroll - avec gestion d'erreur améliorée
-    const sections = document.querySelectorAll('section[id]');
-    function updateActiveLinks() {
-        try {
-            let scrollY = window.scrollY;
-            
-            sections.forEach(section => {
-                if (!section) return;
-                
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                
-                // Vérification supplémentaire pour s'assurer que l'ID est valide
-                if (!sectionId) return;
-                
-                // Utilisation d'une approche plus sûre pour sélectionner le lien
-                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-                
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    // Enlever la classe active de tous les liens
-                    navLinks.forEach(link => {
-                        if (link) link.classList.remove('active');
-                    });
-                    
-                    // Ajouter la classe active au lien correspondant
-                    if (navLink) navLink.classList.add('active');
-                }
-            });
-        } catch (error) {
-            console.warn('Erreur lors de la mise à jour des liens de navigation actifs:', error);
-        }
-    }
-    
-    // Initialiser les liens actifs au chargement et sur scroll
-    window.addEventListener('scroll', updateActiveLinks);
-    setTimeout(updateActiveLinks, 200); // S'assurer que tout est bien rendu avant l'activation initiale
-    
-    // Basculer le thème sombre/clair
-    if (themeToggle) {
-        const savedTheme = localStorage.getItem('theme');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Appliquer le thème sauvegardé ou le thème par défaut
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            if (themeIcon) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            
-            if (themeIcon) {
-                themeIcon.classList.toggle('fa-moon');
-                themeIcon.classList.toggle('fa-sun');
-            }
-            
-            // Sauvegarder la préférence de thème
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    }
-    
-    // Animer les éléments au scroll
-    const animateOnScroll = () => {
-        const fadeElements = document.querySelectorAll('.fade-in, .slide-in');
-        
-        fadeElements.forEach(element => {
-            if (!element) return;
-            
-            const elementPosition = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementPosition < windowHeight - 50) {
-                element.classList.add('active');
-            }
-        });
-    };
-    
-    window.addEventListener('scroll', animateOnScroll);
-    setTimeout(animateOnScroll, 500); // Délai pour s'assurer que les éléments sont calculés correctement
-    
-    // Initialiser les animations de scroll
-    try {
-        initScrollAnimations();
-    } catch (error) {
-        console.warn('Erreur lors de l\'initialisation des animations de scroll:', error);
-    }
-    
-    // Écouter l'événement de traduction appliquée
-    document.addEventListener('translationsApplied', () => {
-        // Réinitialiser les animations après les traductions
-        setTimeout(animateOnScroll, 100);
-    });
-}
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
 
-// Fonction pour initialiser les animations de scroll
-function initScrollAnimations() {
-    // Si GSAP est disponible, l'utiliser pour les animations avancées
-    if (typeof gsap !== 'undefined' && gsap.ScrollTrigger) {
-        // Animation des compétences au scroll
-        gsap.utils.toArray('.skill-progress').forEach(progress => {
-            if (!progress) return;
-            
-            const width = progress.getAttribute('data-width') || '0%';
-            
-            gsap.to(progress, {
-                width: width,
-                duration: 1.5,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: progress,
-                    start: 'top 80%',
-                    once: true
-                }
-            });
+    // Gestion du menu mobile
+    mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navContainer.classList.toggle('active');
+    });
+
+    // Fermer le menu mobile lors du clic sur un lien
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navContainer.classList.remove('active');
         });
+    });
+
+    // Gestion du scroll pour la navigation
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Ajouter/enlever la classe scrolled pour le style
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+
+        // Cacher/montrer la navigation lors du scroll
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScroll = currentScroll;
+    });
+
+    // Gestion des liens actifs dans la navigation
+    const sections = document.querySelectorAll('section[id]');
+    
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                navLink?.classList.add('active');
+            }
+        });
+    });
+
+    // Gestion du carrousel portfolio
+    const carousel = document.querySelector('.portfolio-carousel');
+    const container = carousel.querySelector('.portfolio-container');
+    const items = carousel.querySelectorAll('.portfolio-item');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+
+    let currentIndex = 0;
+    let isAnimating = false;
+    const itemsPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+    // Créer les 4 segments de la barre de progression
+    const numberOfSegments = 4;
+    for (let i = 0; i < numberOfSegments; i++) {
+        const segment = document.createElement('span');
+        segment.classList.add('dot');
+        if (i === 0) {
+            segment.classList.add('active');
+            segment.style.setProperty('--progress', '0%');
+        }
+        segment.addEventListener('click', () => {
+            if (!isAnimating) {
+                stopAutoplay();
+                // Calculer l'index du projet correspondant au segment
+                const projectIndex = Math.floor((items.length / numberOfSegments) * i);
+                goToSlide(projectIndex);
+                startAutoplay();
+            }
+        });
+        dotsContainer.appendChild(segment);
     }
-} 
+
+    // Mettre à jour l'affichage avec animation
+    function updateCarousel(direction = 'next') {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const slideWidth = carousel.clientWidth / itemsPerView;
+        container.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        
+        // Mettre à jour la barre de progression
+        const segmentIndex = Math.floor((currentIndex / items.length) * numberOfSegments);
+        dotsContainer.querySelectorAll('.dot').forEach((segment, index) => {
+            segment.classList.toggle('active', index === segmentIndex);
+            if (index === segmentIndex) {
+                // Réinitialiser l'animation de la barre de progression
+                segment.style.animation = 'none';
+                segment.offsetHeight; // Force reflow
+                segment.style.animation = null;
+            }
+        });
+
+        // Mettre à jour les items avec animation
+        items.forEach((item, index) => {
+            item.classList.remove('active', 'prev', 'next', 'sliding-in', 'sliding-out');
+            
+            if (index === currentIndex) {
+                item.classList.add('active', direction === 'next' ? 'sliding-in' : 'sliding-out');
+            } else if (index === currentIndex - 1 || (currentIndex === 0 && index === items.length - 1)) {
+                item.classList.add('prev');
+            } else if (index === currentIndex + 1 || (currentIndex === items.length - 1 && index === 0)) {
+                item.classList.add('next');
+            }
+        });
+
+        // Réinitialiser l'état d'animation après la transition
+        setTimeout(() => {
+            isAnimating = false;
+        }, 800);
+    }
+
+    // Navigation
+    function goToSlide(index, direction = 'next') {
+        if (isAnimating) return;
+        
+        const previousIndex = currentIndex;
+        currentIndex = Math.max(0, Math.min(index, items.length - itemsPerView));
+        
+        direction = currentIndex > previousIndex ? 'next' : 'prev';
+        updateCarousel(direction);
+    }
+
+    function nextSlide() {
+        if (isAnimating) return;
+        const nextIndex = currentIndex + 1;
+        if (nextIndex >= items.length - itemsPerView + 1) {
+            currentIndex = 0;
+        } else {
+            currentIndex = nextIndex;
+        }
+        updateCarousel('next');
+    }
+
+    function prevSlide() {
+        if (isAnimating) return;
+        const prevIndex = currentIndex - 1;
+        if (prevIndex < 0) {
+            currentIndex = items.length - itemsPerView;
+        } else {
+            currentIndex = prevIndex;
+        }
+        updateCarousel('prev');
+    }
+
+    // Événements
+    nextBtn.addEventListener('click', () => !isAnimating && nextSlide());
+    prevBtn.addEventListener('click', () => !isAnimating && prevSlide());
+
+    // Gestion du swipe sur mobile avec animation
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', e => {
+        if (isAnimating) return;
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    carousel.addEventListener('touchend', e => {
+        if (isAnimating) return;
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    }
+
+    // Autoplay avec gestion de la barre de progression
+    let autoplayInterval;
+    const startAutoplay = () => {
+        autoplayInterval = setInterval(() => {
+            if (!isAnimating) {
+                nextSlide();
+                // Réinitialiser l'animation de la barre active
+                const activeSegment = dotsContainer.querySelector('.dot.active');
+                if (activeSegment) {
+                    activeSegment.style.animation = 'none';
+                    activeSegment.offsetHeight; // Force reflow
+                    activeSegment.style.animation = null;
+                }
+            }
+        }, 5000);
+    };
+
+    const stopAutoplay = () => {
+        clearInterval(autoplayInterval);
+    };
+
+    // Démarrer/arrêter l'autoplay au survol
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('touchstart', stopAutoplay);
+    carousel.addEventListener('touchend', startAutoplay);
+
+    // Démarrer l'autoplay initialement
+    startAutoplay();
+
+    // Mise à jour initiale
+    updateCarousel();
+
+    // Gestion du redimensionnement
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const newItemsPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+            if (newItemsPerView !== itemsPerView) {
+                itemsPerView = newItemsPerView;
+                currentIndex = Math.min(currentIndex, items.length - itemsPerView);
+                updateCarousel();
+            }
+        }, 250);
+    });
+}); 

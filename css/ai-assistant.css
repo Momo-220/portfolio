@@ -1100,4 +1100,62 @@ body.dark-theme .typing-dots span {
     to {
         height: 60px;
     }
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    background-color: rgba(255, 235, 235, 0.9);
+    border-left: 3px solid #ff6b6b;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #d63031;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation pour faire apparaître le message d'erreur */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style pour l'indicateur de statut de connexion */
+.connection-status {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.status-connected {
+    background-color: #00b894;
+}
+
+.status-disconnected {
+    background-color: #ff7675;
+}
+
+/* Style pour le message de notification quand l'API est en mode secours */
+.fallback-notification {
+    font-size: 10px;
+    text-align: center;
+    padding: 3px 0;
+    color: #636e72;
+    background-color: #f1f2f6;
+    border-radius: 3px;
+    margin: 5px auto;
+    width: 90%;
+    opacity: 0.8;
 } 

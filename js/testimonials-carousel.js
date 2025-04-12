@@ -8,11 +8,9 @@ class TestimonialsCarousel {
 
             this.container = this.carousel.querySelector('.testimonials-container');
             this.items = Array.from(this.carousel.querySelectorAll('.testimonial-card'));
-            this.prevBtn = this.carousel.querySelector('.carousel-btn.prev');
-            this.nextBtn = this.carousel.querySelector('.carousel-btn.next');
             this.dotsContainer = this.carousel.querySelector('.carousel-dots');
 
-            if (!this.container || !this.items.length || !this.prevBtn || !this.nextBtn || !this.dotsContainer) {
+            if (!this.container || !this.items.length || !this.dotsContainer) {
                 throw new Error('Éléments requis du carrousel manquants');
             }
 
@@ -62,7 +60,6 @@ class TestimonialsCarousel {
             
             this.setupAccessibility();
             this.setupEventListeners();
-            this.createDots();
             
             if (this.touchEnabled) {
                 this.initTouchEvents();
@@ -99,7 +96,7 @@ class TestimonialsCarousel {
             if (!document.hidden && !this.isAnimating) {
                 this.navigate('next');
             }
-        }, 5000);
+        }, 6000); // 6 secondes pour éviter la synchronisation avec le carousel du portfolio
     }
 
     stopAutoplay() {
@@ -115,10 +112,6 @@ class TestimonialsCarousel {
         this.carousel.setAttribute('aria-label', 'Témoignages des clients');
         this.container.setAttribute('role', 'list');
         
-        // Configuration des boutons
-        this.prevBtn.setAttribute('aria-label', 'Témoignage précédent');
-        this.nextBtn.setAttribute('aria-label', 'Témoignage suivant');
-        
         // Configuration des cartes de témoignages
         this.items.forEach((item, index) => {
             item.setAttribute('role', 'listitem');
@@ -128,10 +121,6 @@ class TestimonialsCarousel {
     }
 
     setupEventListeners() {
-        // Événements des boutons
-        this.prevBtn.addEventListener('click', () => this.navigate('prev'));
-        this.nextBtn.addEventListener('click', () => this.navigate('next'));
-        
         // Navigation au clavier
         this.carousel.addEventListener('keydown', (e) => {
             switch(e.key) {
@@ -163,6 +152,9 @@ class TestimonialsCarousel {
                 }
             });
         });
+        
+        // Ajouter des écouteurs aux points de navigation
+        this.updateDots();
     }
 
     getItemsPerView() {
@@ -177,7 +169,6 @@ class TestimonialsCarousel {
         
         try {
             this.isAnimating = true;
-            const previousIndex = this.currentIndex;
             
             if (direction === 'next') {
                 this.currentIndex = this.currentIndex >= this.items.length - this.itemsPerView ? 
@@ -196,7 +187,6 @@ class TestimonialsCarousel {
         } catch (error) {
             console.error('Erreur lors de la navigation:', error);
             this.isAnimating = false;
-            this.showErrorNotification('Une erreur est survenue lors de la navigation');
         }
     }
 
@@ -204,29 +194,29 @@ class TestimonialsCarousel {
         // Calcul de la translation
         const itemWidth = 100 / this.itemsPerView;
         const translateX = -(this.currentIndex * itemWidth);
-        
+
         // Application de la translation avec animation
         this.container.style.transform = `translateX(${translateX}%)`;
-        
+
         // Mise à jour des états ARIA et des classes
         this.items.forEach((item, index) => {
             item.classList.remove('active', 'prev', 'next');
             item.setAttribute('aria-hidden', String(!(index >= this.currentIndex && index < this.currentIndex + this.itemsPerView)));
-            
+                            
             if (index === this.currentIndex) {
                 item.classList.add('active');
                 item.setAttribute('tabindex', '0');
-            } else if (index === this.currentIndex - 1 || 
+            } else if (index === this.currentIndex - 1 ||
                 (this.currentIndex === 0 && index === this.items.length - 1)) {
                 item.classList.add('prev');
                 item.setAttribute('tabindex', '-1');
-            } else if (index === this.currentIndex + 1 || 
+            } else if (index === this.currentIndex + 1 ||
                 (this.currentIndex === this.items.length - 1 && index === 0)) {
                 item.classList.add('next');
                 item.setAttribute('tabindex', '-1');
             }
         });
-        
+
         // Mise à jour des points
         this.updateDots();
     }
@@ -240,52 +230,66 @@ class TestimonialsCarousel {
             liveRegion.setAttribute('aria-atomic', 'true');
             this.carousel.appendChild(liveRegion);
         }
-        
+
         const currentSlide = this.currentIndex + 1;
         const totalSlides = this.items.length;
         liveRegion.textContent = `Témoignage ${currentSlide} sur ${totalSlides}`;
     }
 
-    createDots() {
-        this.dotsContainer.innerHTML = '';
-        const numberOfDots = Math.ceil(this.items.length / this.itemsPerView);
-        
-        for (let i = 0; i < numberOfDots; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => {
-                if (!this.isAnimating) {
-                    const targetIndex = i * this.itemsPerView;
-                    const direction = targetIndex > this.currentIndex ? 'next' : 'prev';
-                    this.currentIndex = targetIndex;
-                    this.updateCarousel(direction);
-                }
-            });
-            this.dotsContainer.appendChild(dot);
-        }
-    }
-
     updateDots() {
         const dots = this.dotsContainer.querySelectorAll('.dot');
         const activeDotIndex = Math.floor(this.currentIndex / this.itemsPerView);
-        
+
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === activeDotIndex);
         });
+        
+        // Ajouter des écouteurs d'événements aux points
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                if (!this.isAnimating) {
+                    // Arrêter temporairement le défilement automatique
+                    this.stopAutoplay();
+                    
+                    const targetIndex = index * this.itemsPerView;
+                    this.goToSlide(targetIndex);
+                    
+                    // Redémarrer le défilement automatique après 10 secondes
+                    setTimeout(() => {
+                        this.startAutoplay();
+                    }, 10000);
+                }
+            });
+        });
+    }
+    
+    goToSlide(index) {
+        if (this.isAnimating || index === this.currentIndex) return;
+        
+        this.isAnimating = true;
+        const direction = index > this.currentIndex ? 'next' : 'prev';
+        this.currentIndex = index;
+        this.updateCarousel(direction);
+        
+        setTimeout(() => {
+            this.isAnimating = false;
+        }, 500);
     }
 
     initTouchEvents() {
         let touchStartX = 0;
         let touchEndX = 0;
-        
+
         this.carousel.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
+            // Arrêter le défilement automatique pendant le toucher
+            this.stopAutoplay();
         }, { passive: true });
-        
+
         this.carousel.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].clientX;
             const diff = touchStartX - touchEndX;
-            
+
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
                     this.navigate('next');
@@ -293,17 +297,21 @@ class TestimonialsCarousel {
                     this.navigate('prev');
                 }
             }
+            
+            // Redémarrer le défilement automatique après le toucher
+            setTimeout(() => {
+                this.startAutoplay();
+            }, 3000);
         });
     }
 
     handleResize() {
         try {
             const newItemsPerView = this.getItemsPerView();
-            
+
             if (newItemsPerView !== this.itemsPerView) {
                 this.itemsPerView = newItemsPerView;
                 this.currentIndex = Math.min(this.currentIndex, this.items.length - this.itemsPerView);
-                this.createDots();
                 this.updateCarousel();
             }
         } catch (error) {
@@ -311,32 +319,16 @@ class TestimonialsCarousel {
         }
     }
 
-    showErrorNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'carousel-error-notification';
-        notification.textContent = message;
-        
-        this.carousel.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
-
     destroy() {
         try {
             // Nettoyage des événements et des intervalles
             this.stopAutoplay();
             window.removeEventListener('resize', this.handleResize.bind(this));
-            
-            // Suppression des gestionnaires d'événements
-            this.prevBtn.removeEventListener('click', this.navigate.bind(this, 'prev'));
-            this.nextBtn.removeEventListener('click', this.navigate.bind(this, 'next'));
-            
+
             // Réinitialisation des styles
             this.container.style.transform = '';
             this.container.style.transition = '';
-            
+
             // Suppression des classes ajoutées
             this.items.forEach(item => {
                 item.classList.remove('active', 'prev', 'next');
@@ -353,7 +345,7 @@ class TestimonialsCarousel {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         const carousel = new TestimonialsCarousel();
-        
+
         // Gestion de la visibilité de la page
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -362,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 carousel.startAutoplay();
             }
         });
-        
+
         // Nettoyage lors de la destruction de la page
         window.addEventListener('beforeunload', () => {
             carousel.destroy();

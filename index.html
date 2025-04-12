@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.app https://*.vercel.com https://*.googleapis.com https://*.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://*.vercel.com https://*.vercel-analytics.com https://*.vercel-insights.com https://*.analytics.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.com; frame-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.app https://*.vercel.com https://*.googleapis.com https://*.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://*.vercel.com https://*.vercel-analytics.com https://*.vercel-insights.com https://*.analytics.google.com https://*.googleapis.com https://generativelanguage.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.vercel.com; frame-src 'self';">
     
     <!-- Vercel Analytics sera injecté automatiquement via le script -->
     
@@ -112,6 +112,10 @@
             </div>
 
             <div class="nav-right">
+                <div class="lang-selector">
+                    <button class="lang-btn active" data-lang="fr">FR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
                 <button class="theme-toggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -348,12 +352,6 @@
                 </article>
                 -->
                 </div>
-                <button class="carousel-btn prev" aria-label="Previous">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-btn next" aria-label="Next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
                 <div class="carousel-dots"></div>
             </div>
         </section>
@@ -728,12 +726,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="carousel-btn prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-btn next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
                 <div class="carousel-dots">
                     <span class="dot active"></span>
                     <span class="dot"></span>
