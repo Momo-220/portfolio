@@ -54,6 +54,25 @@
 
 </head>
 <body>
+    <style>
+        /* Assurer qu'aucun élément fixe n'apparaît en bas */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        body::after {
+            display: none !important;
+            content: none !important;
+        }
+        .footer, footer {
+            display: none !important;
+            height: 0 !important;
+        }
+        body > div:last-child:not(.preloader):not(.hero):not(.ai-chat-widget):not(.ai-chat-toggle) {
+            display: none !important;
+        }
+    </style>
     <!-- Préchargeur -->
     <div class="preloader glass-effect">
         <div class="loader"></div>
@@ -262,7 +281,7 @@
                         <div class="portfolio-overlay glass-effect">
                             <h3 class="gradient-text">Chef Assistant Web App</h3>
                             <p>React Native, Firebase</p>
-                            <a href="https://ai-chef-kawsar-1.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                            <a href="https://ai-chef-kawsar.vercel.app/" class="portfolio-link button-hover">View Project</a>
                         </div>
                     </div>
                 </article>
@@ -296,6 +315,38 @@
                         </div>
                     </div>
                 </article>
+                <!-- Projets temporairement masqués jusqu'à finalisation
+                <article class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="assets/project6.jpg" alt="Project 6">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">api key manager </h3>
+                            <p>PHP, Docker</p>
+                            <a href="https://apikeymanager-1.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="assets/project7.jpg" alt="Project 7">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Gestionnaire de Tâches</h3>
+                            <p>React.js, Node.js, MongoDB</p>
+                            <a href="https://task-manager-example.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="portfolio-item" data-category="mobile">
+                    <div class="portfolio-image">
+                        <img src="assets/project8.jpg" alt="Project 8">
+                        <div class="portfolio-overlay glass-effect">
+                            <h3 class="gradient-text">Application Météo</h3>
+                            <p>React Native, API Météo</p>
+                            <a href="https://weather-app-example.vercel.app/" class="portfolio-link button-hover">View Project</a>
+                        </div>
+                    </div>
+                </article>
+                -->
                 </div>
                 <button class="carousel-btn prev" aria-label="Previous">
                     <i class="fas fa-chevron-left"></i>
@@ -762,11 +813,6 @@
             <div class="robot-icon"></div>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="footer glass-effect">
-        <p data-translate="footer-text">&copy; 2024 My Portfolio. All rights reserved.</p>
-    </footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>

@@ -1957,18 +1957,18 @@ body.dark-theme .carousel-btn:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(37, 99, 235, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: #ccc;
     border-radius: 5px;
     transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
+    background: #999;
 }
 
 /* Amélioration du scroll indicator */
@@ -2635,4 +2635,27 @@ body.dark-theme .retry-btn {
     to {
         transform: rotate(1turn);
     }
+}
+
+.footer {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    position: absolute !important;
+    bottom: -9999px !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Empêcher toute barre fixe en bas */
+body::after {
+    display: none !important;
+    content: none !important;
+}
+
+body > *:last-child:not(script):not(link) {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
 } 
