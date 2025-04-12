@@ -6,7 +6,6 @@
     "github": {
         "silent": true
     },
-    "analytics": true,
     "installCommand": "npm install",
     "buildCommand": null,
     "outputDirectory": ".",
